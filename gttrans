@@ -1,6 +1,5 @@
 #! /bin/sh
 set -eu
-NAME="${0##*/}"
 
 main() {
   if [ "$#" -lt 1 ]; then
@@ -18,24 +17,24 @@ main() {
       ;;
     -s|--set)
       if [ "$#" -lt 2 ]; then
-        echo "$NAME: no specify percentage"
+        echo "${0##*/}: no specify percentage"
         exit 2
       fi
       set_transparency "$2"
       exit 0
       ;;
     *)
-      echo "$NAME: invalid operation '$1'"
+      echo "${0##*/}: invalid operation '$1'"
       exit 2
       ;;
   esac
 }
 usage() {
-  echo "usage: $NAME <operation> [...]"
+  echo "usage: ${0##*/} <operation> [...]"
   echo "operations:"
-  echo "  $NAME {-h --help}              # show this help message"
-  echo "  $NAME {-g --get}               # show the current transparency"
-  echo "  $NAME {-s --set} <percentage>  # set the transparency"
+  echo "  ${0##*/} {-h --help}              # show this help message"
+  echo "  ${0##*/} {-g --get}               # show the current transparency"
+  echo "  ${0##*/} {-s --set} <percentage>  # set the transparency"
 }
 schema() {
   (
