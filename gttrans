@@ -1,5 +1,5 @@
 #! /bin/sh
-set -e
+set -eu
 NAME="${0##*/}"
 UUID="$(gsettings get org.gnome.Terminal.ProfilesList default)"
 UUID="${UUID##\'}"
