@@ -7,11 +7,7 @@ main() {
     usage
     exit 2
   fi
-  UUID="$(gsettings get org.gnome.Terminal.ProfilesList default)"
-  UUID="${UUID##\'}"
-  UUID="${UUID%%\'}"
-  SCHEMA="org.gnome.Terminal.Legacy.Profile:"
-  SCHEMA="$SCHEMA/org/gnome/terminal/legacy/profiles:/:$UUID/"
+  SCHEMA=$(schema)
   case "$1" in
     -h|--help)
       usage
@@ -41,6 +37,15 @@ usage() {
   echo "  $NAME {-h --help}              # show this help message"
   echo "  $NAME {-g --get}               # show the current transparency"
   echo "  $NAME {-s --set} <percentage>  # set the transparency"
+}
+schema() {
+  (
+    uuid="$(gsettings get org.gnome.Terminal.ProfilesList default)"
+    uuid="${uuid##\'}"
+    uuid="${uuid%%\'}"
+    schema="org.gnome.Terminal.Legacy.Profile:"
+    echo "$schema/org/gnome/terminal/legacy/profiles:/:$uuid/"
+  )
 }
 get_transparency() {
   gsettings get "$SCHEMA" "background-transparency-percent"
