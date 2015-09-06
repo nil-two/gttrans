@@ -1,17 +1,17 @@
 #! /bin/sh
 set -eu
 NAME="${0##*/}"
-UUID="$(gsettings get org.gnome.Terminal.ProfilesList default)"
-UUID="${UUID##\'}"
-UUID="${UUID%%\'}"
-SCHEMA="org.gnome.Terminal.Legacy.Profile:"\
-"/org/gnome/terminal/legacy/profiles:/:$UUID/"
 
 main() {
   if [ "$#" -lt 1 ]; then
     usage
     exit 2
   fi
+  UUID="$(gsettings get org.gnome.Terminal.ProfilesList default)"
+  UUID="${UUID##\'}"
+  UUID="${UUID%%\'}"
+  SCHEMA="org.gnome.Terminal.Legacy.Profile:"
+  SCHEMA="$SCHEMA/org/gnome/terminal/legacy/profiles:/:$UUID/"
   case "$1" in
     -h|--help)
       usage
