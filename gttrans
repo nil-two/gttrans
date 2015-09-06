@@ -7,7 +7,6 @@ main() {
     usage
     exit 2
   fi
-  SCHEMA=$(schema)
   case "$1" in
     -h|--help)
       usage
@@ -48,16 +47,22 @@ schema() {
   )
 }
 get_transparency() {
-  gsettings get "$SCHEMA" "background-transparency-percent"
+  (
+    schema="$(schema)"
+    gsettings get "$schema" "background-transparency-percent"
+  )
 }
 set_transparency() {
-  per="$1"
-  if [ "$per" -eq 0 ]; then
-    gsettings set "$SCHEMA" "use-transparent-background" "false"
-  else
-    gsettings set "$SCHEMA" "use-transparent-background" "true"
-  fi
-  gsettings set "$SCHEMA" "background-transparency-percent" "$per"
+  (
+    schema=$(schema)
+    per="$1"
+    if [ "$per" -eq 0 ]; then
+      gsettings set "$schema" "use-transparent-background" "false"
+    else
+      gsettings set "$schema" "use-transparent-background" "true"
+    fi
+    gsettings set "$schema" "background-transparency-percent" "$per"
+  )
 }
 
 main $*
