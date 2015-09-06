@@ -46,7 +46,7 @@ get_transparency() {
   gsettings get "$SCHEMA" "background-transparency-percent"
 }
 set_transparency() {
-  local per="$1"
+  per="$1"
   if [ "$per" -eq 0 ]; then
     gsettings set "$SCHEMA" "use-transparent-background" "false"
   else
