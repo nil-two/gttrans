@@ -1,34 +1,6 @@
 #! /bin/sh
 set -eu
 
-main() {
-  if [ "$#" -lt 1 ]; then
-    usage
-    exit 2
-  fi
-  case "$1" in
-    -h|--help)
-      usage
-      exit 0
-      ;;
-    -g|--get)
-      get_transparency
-      exit 0
-      ;;
-    -s|--set)
-      if [ "$#" -lt 2 ]; then
-        echo "${0##*/}: no specify percentage"
-        exit 2
-      fi
-      set_transparency "$2"
-      exit 0
-      ;;
-    *)
-      echo "${0##*/}: invalid operation '$1'"
-      exit 2
-      ;;
-  esac
-}
 usage() {
   echo "usage: ${0##*/} <operation> [...]"
   echo "operations:"
@@ -64,5 +36,29 @@ set_transparency() {
   )
 }
 
-main $*
-exit 0
+if [ "$#" -lt 1 ]; then
+  usage
+  exit 2
+fi
+case "$1" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  -g|--get)
+    get_transparency
+    exit 0
+    ;;
+  -s|--set)
+    if [ "$#" -lt 2 ]; then
+      echo "${0##*/}: no specify percentage"
+      exit 2
+    fi
+    set_transparency "$2"
+    exit 0
+    ;;
+  *)
+    echo "${0##*/}: invalid operation '$1'"
+    exit 2
+    ;;
+esac
