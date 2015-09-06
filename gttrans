@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -e
+
+uuid="$(gsettings get org.gnome.Terminal.ProfilesList default)"
+uuid="${uuid##\'}"
+uuid="${uuid%%\'}"
+schema="org.gnome.Terminal.Legacy.Profile:"\
+"/org/gnome/terminal/legacy/profiles:/:$uuid/"
+
+usage() {
+  echo "usage: $0 <operation> [...]"
+  echo "operations:"
+  echo "  $0 {-h --help}              # show this help message"
+  echo "  $0 {-g --get}               # show the current transparency"
+  echo "  $0 {-s --set} <percentage>  # set the transparency"
+}
+get_transparency() {
+  gsettings get "$schema" "background-transparency-percent"
+}
+set_transparency() {
+  local per="$1"
+  if [ "$per" -eq 0 ]; then
+    gsettings set "$schema" "use-transparent-background" "false"
+  else
+    gsettings set "$schema" "use-transparent-background" "true"
+  fi
+  gsettings set "$schema" "background-transparency-percent" "$per"
+}
+
+if [ "$#" -lt 1 ]; then
+  usage
+  exit 2
+fi
+case "$1" in
+  -h|--help)
+    usage
+    exit 0
+    ;;
+  -g|--get)
+    get_transparency
+    exit 0
+    ;;
+  -s|--set)
+    if [ "$#" -lt 2 ]; then
+      echo "$0: no specify percentage"
+      exit 2
+    fi
+    set_transparency "$2"
+    exit 0
+    ;;
+  *)
+    echo "$0: invalid operation '$1'"
+    exit 2
+    ;;
+esac
