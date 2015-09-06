@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 set -e
+NAME="$(basename $0)"
 
 uuid="$(gsettings get org.gnome.Terminal.ProfilesList default)"
 uuid="${uuid##\'}"
@@ -8,11 +9,11 @@ schema="org.gnome.Terminal.Legacy.Profile:"\
 "/org/gnome/terminal/legacy/profiles:/:$uuid/"
 
 usage() {
-  echo "usage: $0 <operation> [...]"
+  echo "usage: $NAME <operation> [...]"
   echo "operations:"
-  echo "  $0 {-h --help}              # show this help message"
-  echo "  $0 {-g --get}               # show the current transparency"
-  echo "  $0 {-s --set} <percentage>  # set the transparency"
+  echo "  $NAME {-h --help}              # show this help message"
+  echo "  $NAME {-g --get}               # show the current transparency"
+  echo "  $NAME {-s --set} <percentage>  # set the transparency"
 }
 get_transparency() {
   gsettings get "$schema" "background-transparency-percent"
@@ -42,14 +43,14 @@ case "$1" in
     ;;
   -s|--set)
     if [ "$#" -lt 2 ]; then
-      echo "$0: no specify percentage"
+      echo "$NAME: no specify percentage"
       exit 2
     fi
     set_transparency "$2"
     exit 0
     ;;
   *)
-    echo "$0: invalid operation '$1'"
+    echo "$NAME: invalid operation '$1'"
     exit 2
     ;;
 esac
