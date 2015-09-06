@@ -2,11 +2,11 @@
 set -e
 NAME="$(basename $0)"
 
-uuid="$(gsettings get org.gnome.Terminal.ProfilesList default)"
-uuid="${uuid##\'}"
-uuid="${uuid%%\'}"
-schema="org.gnome.Terminal.Legacy.Profile:"\
-"/org/gnome/terminal/legacy/profiles:/:$uuid/"
+UUID="$(gsettings get org.gnome.Terminal.ProfilesList default)"
+UUID="${UUID##\'}"
+UUID="${UUID%%\'}"
+SCHEMA="org.gnome.Terminal.Legacy.Profile:"\
+"/org/gnome/terminal/legacy/profiles:/:$UUID/"
 
 main() {
   if [ "$#" -lt 1 ]; then
@@ -44,16 +44,16 @@ usage() {
   echo "  $NAME {-s --set} <percentage>  # set the transparency"
 }
 get_transparency() {
-  gsettings get "$schema" "background-transparency-percent"
+  gsettings get "$SCHEMA" "background-transparency-percent"
 }
 set_transparency() {
   local per="$1"
   if [ "$per" -eq 0 ]; then
-    gsettings set "$schema" "use-transparent-background" "false"
+    gsettings set "$SCHEMA" "use-transparent-background" "false"
   else
-    gsettings set "$schema" "use-transparent-background" "true"
+    gsettings set "$SCHEMA" "use-transparent-background" "true"
   fi
-  gsettings set "$schema" "background-transparency-percent" "$per"
+  gsettings set "$SCHEMA" "background-transparency-percent" "$per"
 }
 
 main $*
