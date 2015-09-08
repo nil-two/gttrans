@@ -25,7 +25,7 @@ get_transparency() {
 }
 set_transparency() {
   (
-    schema=$(schema)
+    schema="$(schema)"
     per="$1"
     if [ "$per" -eq 0 ]; then
       gsettings set "$schema" "use-transparent-background" "false"
