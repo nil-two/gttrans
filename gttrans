@@ -2,11 +2,13 @@
 set -eu
 
 usage() {
-  echo "usage: ${0##*/} <operation> [...]"
-  echo "operations:"
-  echo "  ${0##*/} {-h --help}              # show this help message"
-  echo "  ${0##*/} {-g --get}               # show the current transparency"
-  echo "  ${0##*/} {-s --set} <percentage>  # set the transparency"
+  cat <<__USAGE__ >&2
+usage: ${0##*/} <operation> [...]
+operations:"
+  ${0##*/} {-h --help}              # show this help message
+  ${0##*/} {-g --get}               # show the current transparency
+  ${0##*/} {-s --set} <percentage>  # set the transparency
+__USAGE__
 }
 schema() {
   (
