@@ -51,14 +51,14 @@ case "$1" in
     ;;
   -s|-set|--set)
     if [ "$#" -lt 2 ]; then
-      echo "${0##*/}: no specify percentage"
+      echo "${0##*/}: no specify percentage" >&2
       exit 2
     fi
     set_transparency "$2"
     exit 0
     ;;
   *)
-    echo "${0##*/}: invalid operation '$1'"
+    echo "${0##*/}: invalid operation '$1'" >&2
     exit 2
     ;;
 esac
