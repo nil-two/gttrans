@@ -10,6 +10,7 @@ operations:"
   ${0##*/} {-s --set} <percentage>  # set the transparency
 __USAGE__
 }
+
 schema() {
   (
     uuid="$(gsettings get org.gnome.Terminal.ProfilesList default)"
@@ -19,12 +20,14 @@ schema() {
     echo "$schema/org/gnome/terminal/legacy/profiles:/:$uuid/"
   )
 }
+
 get_transparency() {
   (
     schema="$(schema)"
     gsettings get "$schema" "background-transparency-percent"
   )
 }
+
 set_transparency() {
   (
     schema="$(schema)"
