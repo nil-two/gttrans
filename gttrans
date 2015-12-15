@@ -2,7 +2,7 @@
 set -eu
 
 usage() {
-  cat <<__USAGE__ >&2
+  cat <<__USAGE__
 usage: ${0##*/} <operation> [...]
 operations:"
   ${0##*/} {-h --help}              # show this help message
@@ -42,12 +42,12 @@ set_transparency() {
 }
 
 if [ "$#" -lt 1 ]; then
-  usage
+  usage >&2
   exit 2
 fi
 case "$1" in
   -h|-help|--help)
-    usage
+    usage >&2
     exit 0
     ;;
   -g|-get|--get)
