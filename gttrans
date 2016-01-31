@@ -45,7 +45,7 @@ set_transparency() {
   )
 }
 
-if [ "$#" -lt 1 ]; then
+if [ $# -lt 1 ]; then
   usage
   exit 2
 fi
@@ -59,7 +59,7 @@ case "$1" in
     exit 0
     ;;
   -s|-set|--set)
-    if [ "$#" -lt 2 ]; then
+    if [ $# -lt 2 ]; then
       warn "no specify percentage"
       exit 2
     fi
