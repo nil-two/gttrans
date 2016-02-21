@@ -24,6 +24,7 @@ Usage
 
 ```
 $ gttrans <operation> [...]
+modify transparency of gnome-terminal.
 
 operations:
   gttrans {-h --help}              # show this help message
