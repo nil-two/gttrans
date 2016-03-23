@@ -19,9 +19,9 @@ warn() {
 
 schema() {
   (
-    uuid="$(gsettings get org.gnome.Terminal.ProfilesList default)"
-    uuid="${uuid##\'}"
-    uuid="${uuid%%\'}"
+    uuid=$(gsettings get org.gnome.Terminal.ProfilesList default)
+    uuid=${uuid##\'}
+    uuid=${uuid%%\'}
     schema="org.gnome.Terminal.Legacy.Profile:"
     echo "$schema/org/gnome/terminal/legacy/profiles:/:$uuid/"
   )
@@ -29,15 +29,15 @@ schema() {
 
 get_transparency() {
   (
-    schema="$(schema)"
+    schema=$(schema)
     gsettings get "$schema" "background-transparency-percent"
   )
 }
 
 set_transparency() {
   (
-    schema="$(schema)"
-    per="$1"
+    schema=$(schema)
+    per=$1
     if [ "$per" -eq 0 ]; then
       gsettings set "$schema" "use-transparent-background" "false"
     else
@@ -51,7 +51,7 @@ if [ $# -lt 1 ]; then
   usage
   exit 2
 fi
-case "$1" in
+case $1 in
   -h|-help|--help)
     usage
     exit 0
