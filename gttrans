@@ -14,7 +14,7 @@ __USAGE__
 }
 
 warn() {
-  echo "${0##*/}: $*" >&2
+  printf "%s: %s\n" "${0##*/}" "$*" >&2
 }
 
 schema() {
@@ -23,7 +23,7 @@ schema() {
     uuid=${uuid##\'}
     uuid=${uuid%%\'}
     schema="org.gnome.Terminal.Legacy.Profile:"
-    echo "$schema/org/gnome/terminal/legacy/profiles:/:$uuid/"
+    printf "%s\n" "$schema/org/gnome/terminal/legacy/profiles:/:$uuid/"
   )
 }
 
