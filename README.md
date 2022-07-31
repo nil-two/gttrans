@@ -15,7 +15,7 @@ Installation
 ------------
 
 ```sh
-curl -L https://raw.githubusercontent.com/kusabashira/gttrans/master/gttrans > ~/bin/gttrans
+curl -L https://raw.githubusercontent.com/nil2nekoni2/gttrans/master/gttrans > ~/bin/gttrans
 chmod 755 ~/bin/gttrans
 ```
 
@@ -40,4 +40,4 @@ MIT License
 Author
 ------
 
-kusabashira <kusabashira227@gmail.com>
+nil2 <nil2@nil2.org>
