@@ -15,7 +15,7 @@ Installation
 ------------
 
 ```sh
-curl -L https://raw.githubusercontent.com/nil2nekoni2/gttrans/master/gttrans > ~/bin/gttrans
+curl -L https://raw.githubusercontent.com/nil-two/gttrans/master/gttrans > ~/bin/gttrans
 chmod 755 ~/bin/gttrans
 ```
 
